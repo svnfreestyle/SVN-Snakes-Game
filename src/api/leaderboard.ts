@@ -39,8 +39,12 @@ export async function fetchLeaderboard(): Promise<ScoreEntry[]> {
   try {
     const res = await fetch('/api/leaderboard');
     if (!res.ok) throw new Error('Failed to load server scores');
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Non-JSON response from server');
+    }
     const data = await res.json();
-    if (data.success && Array.isArray(data.scores)) {
+    if (data && data.success && Array.isArray(data.scores)) {
       cacheLeaderboard(data.scores);
       return data.scores;
     }
@@ -78,12 +82,15 @@ export async function submitScore(
       body: JSON.stringify({ name: sanitizedName, score, speed, walls }),
     });
 
-    const data = await res.json();
-    if (data.success && Array.isArray(data.scores)) {
-      cacheLeaderboard(data.scores);
-      return { success: true, scores: data.scores };
+    const contentType = res.headers.get('content-type');
+    if (res.ok && contentType && contentType.includes('application/json')) {
+      const data = await res.json();
+      if (data && data.success && Array.isArray(data.scores)) {
+        cacheLeaderboard(data.scores);
+        return { success: true, scores: data.scores };
+      }
     }
-    return { success: false, scores: getCachedLeaderboard(), error: data.error || 'Server error' };
+    throw new Error('Server unavailable');
   } catch (err) {
     console.warn('Network error saving to server; saving locally:', err);
     // Offline local persistence
