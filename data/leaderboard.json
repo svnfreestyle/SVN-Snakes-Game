@@ -1,0 +1,42 @@
+[
+  {
+    "id": "seed-1",
+    "name": "SVN_MASTER",
+    "score": 320,
+    "speed": "normal",
+    "walls": true,
+    "timestamp": 1792249808554
+  },
+  {
+    "id": "seed-2",
+    "name": "NOKIA_3310",
+    "score": 260,
+    "speed": "normal",
+    "walls": true,
+    "timestamp": 1792077008554
+  },
+  {
+    "id": "seed-3",
+    "name": "RETRO_VIPER",
+    "score": 210,
+    "speed": "fast",
+    "walls": false,
+    "timestamp": 1791904208554
+  },
+  {
+    "id": "seed-4",
+    "name": "PIXEL_BYTE",
+    "score": 170,
+    "speed": "normal",
+    "walls": true,
+    "timestamp": 1791731408554
+  },
+  {
+    "id": "seed-5",
+    "name": "GLITCH",
+    "score": 120,
+    "speed": "slow",
+    "walls": false,
+    "timestamp": 1791472208554
+  }
+]

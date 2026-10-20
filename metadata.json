@@ -1,0 +1,6 @@
+{
+  "name": "SVN Snakes Game",
+  "description": "Classic Nokia-style retro snake game with minimalist dark mode, responsive touch controls, and online server leaderboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
