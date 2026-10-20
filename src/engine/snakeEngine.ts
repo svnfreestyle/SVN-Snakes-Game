@@ -82,7 +82,7 @@ export class SnakeEngine {
     this.spawnFood();
   }
 
-  private updateSpeed() {
+  public updateSpeed() {
     // Progressive challenge: Each level (every 10 foods) increases the speed automatically
     const levelIndex = this.level - 1; // 0 for level 1, 1 for level 2, etc.
 
@@ -107,7 +107,7 @@ export class SnakeEngine {
   }
 
   public queueDirection(newDir: Point): boolean {
-    if (!this.isAlive || this.isPaused) return false;
+    if (!this.isAlive) return false;
 
     // Determine reference direction (either the last queued direction or current direction)
     const lastDir = this.inputQueue.length > 0 ? this.inputQueue[this.inputQueue.length - 1] : this.direction;

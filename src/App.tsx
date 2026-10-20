@@ -87,20 +87,17 @@ export default function App() {
     loadLeaderboard();
   }, [loadLeaderboard]);
 
-  // Sync engine configuration when options change
+  // Sync engine configuration when speed or walls options change
   useEffect(() => {
     engineRef.current.config.speed = speed;
     engineRef.current.config.walls = walls;
-    if (gameState === 'PLAYING') {
-      // update speed interval
-      engineRef.current.reset();
-    }
-  }, [speed, walls, gameState]);
+    engineRef.current.updateSpeed();
+  }, [speed, walls]);
 
-  // Steer snake handler
+  // Steer snake handler (active in playing and can pre-steer while paused)
   const handleDirection = useCallback(
     (dir: Point) => {
-      if (gameState === 'PLAYING') {
+      if (gameState === 'PLAYING' || gameState === 'PAUSED') {
         const queued = engineRef.current.queueDirection(dir);
         if (queued) {
           sound.playTurn();
